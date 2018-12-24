@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>The Confidence in our k-Tails</display-name>
+
+    <servlet>
+        <servlet-name>dms</servlet-name>
+        <servlet-class>il.ac.tau.cs.smlab.web.DifferenceMiningServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>dms</servlet-name>
+        <url-pattern>/dms</url-pattern>
+    </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>dmis</servlet-name>
+        <servlet-class>il.ac.tau.cs.smlab.web.DifferenceMiningImageServlet</servlet-class>
+    </servlet>
+    
+     <servlet-mapping>
+        <servlet-name>dmis</servlet-name>
+        <url-pattern>/dmis</url-pattern>
+    </servlet-mapping>
+
+</web-app> 

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="DifferenceMiningWebapp">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="commons-io-2.5.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/lib/LogDiffAlternativeApp/lib/commons-io-2.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="plume.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/SYNOPTIC_LIB/plume.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Daikonizer.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Daikonizer/Daikonizer">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="LogDiffEvaluation.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/LogDiffEvaluation/LogDiffEvaluation">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="LogDiffAlternativeApp.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/LogDiffAlternativeApp/LogDiffAlternativeApp">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Synoptic-Diff.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Synoptic-Diff/Synoptic-Diff">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/DifferenceMiningWebapp/build/classes"/>
+        <property name="context-root" value="DifferenceMiningWebapp"/>
+    </wb-module>
+</project-modules>

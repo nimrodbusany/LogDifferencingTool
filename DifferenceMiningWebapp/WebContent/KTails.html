@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script
+	src="js/jquery-1.11.3.min.js"></script>
+<head>
+<meta charset="utf-8">
+<title>KTails</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<!-- Le styles -->
+<link href="css/bootstrap.css" rel="stylesheet">
+<style>
+body {
+	padding-top: 60px;
+	/* 60px to make the container go all the way to the bottom of the topbar */
+}
+
+#loader {
+	border: 16px solid #f3f3f3; /* Light grey */
+	border-top: 16px solid #3498db; /* Blue */
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+}
+
+@keyframes spin { 
+        from { 
+            transform: rotate(0deg); 
+        } to { 
+            transform: rotate(360deg); 
+        }
+    
+.center_progress {
+	margin: auto;
+	float: center;
+}
+
+
+.left {
+	float: left;
+	width: 300px;
+	border: 3px solid #73AD21;
+	padding: 10px;
+}
+
+.center {
+	text-align: center;
+	font-size: 20px;
+}
+</style>
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+<!-- Fav and touch icons -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="../assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="../assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="../assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed"
+	href="../assets/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="../assets/ico/favicon.png">
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				   <a class="navbar-brand" href="#"></a>
+			       </div>
+			       <div id="navbar" class="collapse navbar-collapse">
+			         <ul class="nav navbar-nav">
+			           <li class="active"><a href="#">KTails</a></li>
+			           <li><a href="index.html">Home</a></li>
+			           <li><a href="nKDiff.html">nKDiff</a></li>
+			           <li><a href="2KDiff.html">2KDiff</a></li>
+			           <li><a href="KTails.html">KTails</a></li>
+			         </ul>
+			       </div><!--/.nav-collapse -->
+		</div>
+	</nav>
+
+	<div class="container" id="maincontainer">
+	<!-- 
+		<div id="algorithm">
+			K:
+			<div class="dropdown">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="ktailsk" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					1 <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li><a href="#">1</a></li>
+					<li><a href="#">2</a></li>
+				</ul>
+			</div>
+		</div> -->
+
+		<!-- <div id="groups">
+    		GroupID:
+    		<div class="dropdown">
+  				<button class="btn btn-default dropdown-toggle" type="button" id="GroupID" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+   				nKDiff
+    			<span class="caret"></span>
+  				</button>
+ 				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				<li><a href="#">1</a></li>
+				<li><a href="#">2</a></li>
+				<li><a href="#">3</a></li>
+				</ul>
+  			</div>
+    	</div> !-->
+
+		<form method="post" action="process">
+			<hr>
+			<div id="manual">
+				<BR>
+
+				<div id=examples class="pull-right">
+					<ul>
+						<li><a href="javascript:void(0)"
+							onclick="readLog('demo-log','(?<TYPE>.*)','\\k<FILE>','--');">Example
+								1</a></li>
+						<li><a href="javascript:void(0)"
+							onclick="readLog('ZipOutputStream','(?<TYPE>.*)','\\k<FILE>','--');">Example
+								2</a></li>
+						<li><a href="javascript:void(0)"
+							onclick="readLog('java.util.Formatter','(?<TYPE>.*)','\\k<FILE>','--');">Example
+								3</a></li>
+					</ul>
+				</div>
+				<textarea id="log1" name="Log 1" rows="10" cols="30"></textarea>
+			</div>
+			<hr>
+			<hr>
+				<div>
+					<button type="button" class="btn" id="submit" class="pull-left">Submit</button>
+					<br> <br>
+					<div id="loader" class="col-md-2 col-md-offset-5"> </div>
+				</div>
+			</form>
+			</div>
+			<script>
+				window.onload = function() {
+					$("#loader").hide();
+				};
+
+
+				function readLog(file, regex, tpart, tsepr) {
+					var filePath = "http://" + window.location.host
+							+ "/DifferenceMiningWebapp/dmis?log=" + file
+							+ ".txt";
+					$.ajax({
+						url : filePath
+					}).done(function(data) {
+						document.getElementById('log1').value = data;
+					});
+
+				}
+				function toggleManualRadio(_checked) {
+					if (_checked) {
+						document.getElementById('manualradio').checked = true;
+						$("#firstlog").removeAttr('disabled');
+						$("#secondlog").removeAttr('disabled');
+						$("#examples").removeAttr('disabled');
+
+						document.getElementById('autoradio').checked = false;
+						$("#logsfolder").attr("disabled", "disabled");
+					} else {
+						document.getElementById('manualradio').checked = false;
+						$("#firstlog").attr("disabled", "disabled");
+						$("#secondlog").attr("disabled", "disabled");
+						$("#examples").attr("disabled", "disabled");
+
+						document.getElementById('autoradio').checked = true;
+						$("#logsfolder").removeAttr('disabled');
+					}
+
+					//document.getElementById('manualradio').checked  = _checked;
+				}
+				function toggleDisabledAutoRadio(_checked) {
+					if (_checked) {
+						document.getElementById('manualradio').checked = false;
+						$("#firstlog").attr("disabled", "disabled");
+						$("#secondlog").attr("disabled", "disabled");
+						$("#examples").attr("disabled", "disabled");
+
+						document.getElementById('autoradio').checked = true;
+						$("#logsfolder").removeAttr('disabled');
+					} else {
+						document.getElementById('manualradio').checked = true;
+						$("#firstlog").removeAttr('disabled');
+						$("#secondlog").removeAttr('disabled');
+						$("#examples").removeAttr('disabled');
+
+						document.getElementById('autoradio').checked = false;
+						$("#logsfolder").attr("disabled", "disabled");
+					}
+				}
+				function toggleDisabledKtailsRadio(_checked) {
+					document.getElementById('ktailsradio').checked = _checked;
+					document.getElementById('skstringsradio').checked = !_checked;
+				}
+				function toggleDisabledSkstringsRadio(_checked) {
+					document.getElementById('ktailsradio').checked = !_checked;
+					document.getElementById('skstringsradio').checked = _checked
+				}
+			</script>
+			<script>
+				$(".dropdown-menu li a").click(
+						function() {
+							$(this).parents(".dropdown").find('.btn').html(
+									$(this).text()
+											+ ' <span class="caret"></span>');
+							$(this).parents(".dropdown").find('.btn').val(
+									$(this).data('value'));
+						});
+
+				var homepage = "http://" + window.location.host
+						+ "/DifferenceMiningWebapp/";
+
+				
+		
+				function validateLog(_content) {
+					content = _content.replace(/ /g, '');
+					if (!content) {
+						return "log must not be empty!";
+					}
+					var events = content.split("\n");
+
+					non_empty_lines = []
+					for (i = 0; i < events.length; i++) {
+						event = events[i].replace(/ /g, '');
+						if (event) {
+							non_empty_lines.push(event);
+						}
+					}
+					if (non_empty_lines[non_empty_lines.length - 1] != "--") {
+						return "log must end with --";
+					}
+					return null;
+				}
+
+				$('#submit')
+						.on(
+								'click',
+								function(event) {
+									
+									
+									var image_x = document
+									.getElementById('resultimg');
+		
+									if (image_x) {
+										var parent = image_x.parentNode;
+		
+										if (parent) {
+											parent
+													.removeChild(image_x);
+										}
+									}
+
+									
+									$("#loader").show();
+									document.getElementById("submit").disabled = true;
+									
+									var algorithm = "ktails";
+									var k = "2";
+									var s = "0.5";
+									var separator = "--";
+
+									algorithm = "ktails"
+
+									/*
+									var kdropdown = document
+											.getElementById('ktailsk');
+									k = kdropdown.textContent;
+
+									if (k == null || k == "") {
+										k = "2";
+									}
+									*/
+									var algorithmType = "KTails";
+									var logs = [];
+
+									var val = document.getElementById("log1").value
+									var error = validateLog(val);
+
+									if (error) {
+										alert("please fix log " + 1 + ": "
+												+ error);
+										$("#loader").hide();
+										document.getElementById("submit").disabled = false;
+										return;
+									}
+									logs.push(document.getElementById("log1").value);
+
+									$.ajax({
+												url : homepage + "dms",
+												type : 'POST',
+												data : {
+													"algorithmparam" : algorithmType,
+													"kparam" : k,
+													"sparam" : s,
+													"seperator" : separator,
+													"logs" : logs
+												},
+												//contentType: 'application/json; charset=utf-8',
+												success : function(response) {
+													var imgpath = response["imgpath"][0];
+													var requestData = {
+														"image" : imgpath
+													};
+
+													$
+															.ajax({
+																url : homepage
+																		+ "dmis",
+																type : 'GET',
+																contentType : "image/png",
+																data : requestData,
+																success : function(
+																		response) {
+																	var elem = document
+																			.createElement("img");
+																	elem
+																			.setAttribute(
+																					"src",
+																					"data:image/png;base64,"
+																							+ response);
+																	elem
+																			.setAttribute(
+																					"id",
+																					"resultimg");
+																	document
+																			.getElementById(
+																					"maincontainer")
+																			.appendChild(
+																					elem);
+																	document
+																			.getElementById('resultimg').style.backgroundColor = 'white';
+																	$("#loader").hide();
+																	document.getElementById("submit").disabled = false;
+																},
+																error : function() {
+																	$("#loader").hide();
+																	document.getElementById("submit").disabled = false;
+																}
+															})
+												},
+												error : function() {
+													$("#loader").hide();
+													document.getElementById("submit").disabled = false;
+												}
+											});
+
+								});
+			</script>
+	<!-- /container -->
+
+
+
+	<!-- Le javascript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<script
+		src="//netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css"
+		href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+</body>
