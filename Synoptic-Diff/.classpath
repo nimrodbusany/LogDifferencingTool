@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="var" path="SYNOPTIC_LIB/junit-4.9b2.jar"/>
-	<classpathentry kind="var" path="SYNOPTIC_LIB/plume.jar"/>
-	<classpathentry kind="var" path="SYNOPTIC_LIB"/>
-	<classpathentry kind="var" path="SYNOPTIC_LIB/daikon.jar"/>
-	<classpathentry kind="var" path="SYNOPTIC_LIB/json-simple-1.1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Daikonizer"/>
+	<classpathentry kind="lib" path="C:/Users/USER/git/LogDifferencingTool/Synoptic-Diff/lib/daikon.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/git/LogDifferencingTool/Synoptic-Diff/lib/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/git/LogDifferencingTool/Synoptic-Diff/lib/junit-4.9b2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/USER/git/LogDifferencingTool/Synoptic-Diff/lib/plume.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5">
 		<attributes>
 			<attribute name="owner.project.facets" value="jst.utility"/>

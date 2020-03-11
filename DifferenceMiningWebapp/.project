@@ -3,10 +3,6 @@
 	<name>DifferenceMiningWebapp</name>
 	<comment></comment>
 	<projects>
-		<project>Daikonizer</project>
-		<project>LogDiffEvaluation</project>
-		<project>LogDiffAlternativeApp</project>
-		<project>Synoptic-Diff</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

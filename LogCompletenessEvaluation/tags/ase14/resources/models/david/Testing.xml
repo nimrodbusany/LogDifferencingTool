@@ -1,0 +1,35 @@
+<simulation>
+	<startnode>0</startnode>
+	<nodes>
+		<node name="0">
+			<gotos>
+				<goto prob="0.6" out="A::">1</goto>
+			</gotos>
+		</node>
+		<node name="1">
+			<gotos>
+				<goto prob="0.1" out="">2</goto>
+				<goto prob="0.1" out="">0</goto>
+			</gotos>
+		</node>
+		<node name="2">
+			<gotos>
+				<goto prob="1" out="">3</goto>
+				<goto prob="1" out="">1</goto>
+			</gotos>
+		</node>
+		<node name="3">
+			<gotos>
+				<goto prob="1" out="">4</goto>
+				<goto prob="1" out="">2</goto>
+			</gotos>
+		</node>
+		<node name="4">
+			<gotos>
+				<goto prob="0.5" out="">3</goto>
+				<goto prob="0.5" out="">TERMINAL</goto>
+			</gotos>
+		</node>
+		<node name="TERMINAL" />
+	</nodes>
+</simulation>
